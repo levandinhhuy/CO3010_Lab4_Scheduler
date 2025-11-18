@@ -356,7 +356,8 @@ void red_time_config()
 
 	if (isFlag(TIMER_7SEG_STATUS))
 	{
-		if (red_temp_time != red_time) {
+		if (red_temp_time != red_time)
+		{
 			if (status_4digits[0] == LED_ON)
 			{
 				status_4digits[0] = LED_OFF;
@@ -367,7 +368,9 @@ void red_time_config()
 				status_4digits[0] = LED_ON;
 				status_4digits[1] = LED_ON;
 			}
-		} else {
+		}
+		else
+		{
 			status_4digits[0] = LED_ON;
 			status_4digits[1] = LED_ON;
 		}
@@ -416,38 +419,41 @@ void yel_time_config()
 	counter_way0 = yel_temp_time;
 	update_led_7seg_buffer();
 
-    if (isFlag(TIMER_250MS))
-    {
-        HAL_GPIO_TogglePin(LED_YEL_0_GPIO_Port, LED_YEL_0_Pin);
-        HAL_GPIO_TogglePin(LED_YEL_1_GPIO_Port, LED_YEL_1_Pin);
-        setTimer(TIMER_250MS, TIME_250MS);
-    }
+	if (isFlag(TIMER_250MS))
+	{
+		HAL_GPIO_TogglePin(LED_YEL_0_GPIO_Port, LED_YEL_0_Pin);
+		HAL_GPIO_TogglePin(LED_YEL_1_GPIO_Port, LED_YEL_1_Pin);
+		setTimer(TIMER_250MS, TIME_250MS);
+	}
 
-    if (isFlag(TIMER_7SEG))
-    {
-        display_4digits();
-        setTimer(TIMER_7SEG, TIME_7SEG);
-    }
+	if (isFlag(TIMER_7SEG))
+	{
+		display_4digits();
+		setTimer(TIMER_7SEG, TIME_7SEG);
+	}
 
-    if (isFlag(TIMER_7SEG_STATUS))
-    {
-        if (yel_temp_time != yel_time) {
-            if (status_4digits[0] == LED_ON)
-            {
-                status_4digits[0] = LED_OFF;
-                status_4digits[1] = LED_OFF;
-            }
-            else
-            {
-                status_4digits[0] = LED_ON;
-                status_4digits[1] = LED_ON;
-            }
-        } else {
-            status_4digits[0] = LED_ON;
-            status_4digits[1] = LED_ON;
-        }
-        setTimer(TIMER_7SEG_STATUS, TIME_7SEG_STATUS);
-    }
+	if (isFlag(TIMER_7SEG_STATUS))
+	{
+		if (yel_temp_time != yel_time)
+		{
+			if (status_4digits[0] == LED_ON)
+			{
+				status_4digits[0] = LED_OFF;
+				status_4digits[1] = LED_OFF;
+			}
+			else
+			{
+				status_4digits[0] = LED_ON;
+				status_4digits[1] = LED_ON;
+			}
+		}
+		else
+		{
+			status_4digits[0] = LED_ON;
+			status_4digits[1] = LED_ON;
+		}
+		setTimer(TIMER_7SEG_STATUS, TIME_7SEG_STATUS);
+	}
 }
 
 void init_grn_time_config()
@@ -488,37 +494,39 @@ void grn_time_config()
 	counter_way0 = grn_temp_time;
 	update_led_7seg_buffer();
 
-    if (isFlag(TIMER_250MS))
-    {
-        HAL_GPIO_TogglePin(LED_GRN_0_GPIO_Port, LED_GRN_0_Pin);
-        HAL_GPIO_TogglePin(LED_GRN_1_GPIO_Port, LED_GRN_1_Pin);
-        setTimer(TIMER_250MS, TIME_250MS);
-    }
+	if (isFlag(TIMER_250MS))
+	{
+		HAL_GPIO_TogglePin(LED_GRN_0_GPIO_Port, LED_GRN_0_Pin);
+		HAL_GPIO_TogglePin(LED_GRN_1_GPIO_Port, LED_GRN_1_Pin);
+		setTimer(TIMER_250MS, TIME_250MS);
+	}
 
-    if (isFlag(TIMER_7SEG))
-    {
-        display_4digits();
-        setTimer(TIMER_7SEG, TIME_7SEG);
-    }
+	if (isFlag(TIMER_7SEG))
+	{
+		display_4digits();
+		setTimer(TIMER_7SEG, TIME_7SEG);
+	}
 
-    if (isFlag(TIMER_7SEG_STATUS))
-    {
-        if (grn_temp_time != grn_time) {
-            if (status_4digits[0] == LED_ON)
-            {
-                status_4digits[0] = LED_OFF;
-                status_4digits[1] = LED_OFF;
-            }
-            else
-            {
-                status_4digits[0] = LED_ON;
-                status_4digits[1] = LED_ON;
-            }
-        } else {
-            status_4digits[0] = LED_ON;
-            status_4digits[1] = LED_ON;
-        }
-        setTimer(TIMER_7SEG_STATUS, TIME_7SEG_STATUS);
-    }
+	if (isFlag(TIMER_7SEG_STATUS))
+	{
+		if (grn_temp_time != grn_time)
+		{
+			if (status_4digits[0] == LED_ON)
+			{
+				status_4digits[0] = LED_OFF;
+				status_4digits[1] = LED_OFF;
+			}
+			else
+			{
+				status_4digits[0] = LED_ON;
+				status_4digits[1] = LED_ON;
+			}
+		}
+		else
+		{
+			status_4digits[0] = LED_ON;
+			status_4digits[1] = LED_ON;
+		}
+		setTimer(TIMER_7SEG_STATUS, TIME_7SEG_STATUS);
+	}
 }
-

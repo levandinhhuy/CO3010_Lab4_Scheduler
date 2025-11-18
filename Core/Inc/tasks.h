@@ -13,7 +13,7 @@
 void blinkyLEDRed();
 void blinkyLEDBlue();
 void blinkyLEDPurple();
-void get3KeyInput();
+void get3Buttons();
 void trafficLight();
 
 #endif /* INC_TASKS_H_ */

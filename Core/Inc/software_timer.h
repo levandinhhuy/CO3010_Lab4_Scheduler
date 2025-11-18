@@ -21,6 +21,5 @@ extern struct TimerStruct timer[10];
 void setTimer(int idx, int counter);
 void timerRun();
 int isFlag(int idx);
-int msToTick(int time_ms);
 
 #endif /* INC_SOFTWARE_TIMER_H_ */

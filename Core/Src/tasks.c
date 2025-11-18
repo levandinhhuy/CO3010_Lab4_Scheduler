@@ -22,7 +22,7 @@ void blinkyLEDPurple()
 	HAL_GPIO_TogglePin(LED_PURPLE_GPIO_Port, LED_PURPLE_Pin);
 }
 
-void get3KeyInput()
+void get3Buttons()
 {
 	getKeyInput(&button0);
 	getKeyInput(&button1);
