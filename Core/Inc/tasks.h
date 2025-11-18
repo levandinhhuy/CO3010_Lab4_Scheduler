@@ -10,7 +10,8 @@
 
 #include "main.h"
 
-void blinkyLED();
+void blinkyLEDBlue();
+void blinkyLEDPurple();
 void trafficLight();
 
 #endif /* INC_TASKS_H_ */

@@ -90,12 +90,15 @@ int main(void)
   MX_GPIO_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_Base_Start(&htim2);
+  /* Start TIM2 in interrupt mode so HAL_TIM_PeriodElapsedCallback is called */
+  HAL_TIM_Base_Start_IT(&htim2);
 
   SCH_Init();
 
-  SCH_Add_Task(trafficLight, msToTick(2000), msToTick(1000));
-  SCH_Add_Task(blinkyLED, msToTick(1000), msToTick(1000));
+  SCH_Add_Task(trafficLight, msToTick(0), msToTick(1000));
+  SCH_Add_Task(blinkyLEDBlue, msToTick(1000), msToTick(1000));
+  SCH_Add_Task(blinkyLEDPurple, msToTick(2000), msToTick(5000));
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -187,6 +190,10 @@ static void MX_TIM2_Init(void)
   }
   /* USER CODE BEGIN TIM2_Init 2 */
 
+  /* Enable TIM2 IRQ in NVIC so timer interrupts are delivered */
+  HAL_NVIC_SetPriority(TIM2_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(TIM2_IRQn);
+
   /* USER CODE END TIM2_Init 2 */
 
 }
@@ -211,7 +218,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOA, SEG_0_Pin|SEG_1_Pin|SEG_2_Pin|SEG_3_Pin
                           |SEG_4_Pin|SEG_5_Pin|SEG_6_Pin|SEG_7_Pin
                           |EN_0_Pin|EN_1_Pin|EN_2_Pin|EN_3_Pin
-                          |LED_RED_Pin|LED_BLUE_Pin, GPIO_PIN_RESET);
+                          |LED_RED_Pin|LED_BLUE_Pin|LED_PURPLE_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, LED_RED_0_Pin|LED_YEL_0_Pin|LED_GRN_0_Pin|LED_RED_1_Pin
@@ -220,11 +227,11 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pins : SEG_0_Pin SEG_1_Pin SEG_2_Pin SEG_3_Pin
                            SEG_4_Pin SEG_5_Pin SEG_6_Pin SEG_7_Pin
                            EN_0_Pin EN_1_Pin EN_2_Pin EN_3_Pin
-                           LED_RED_Pin LED_BLUE_Pin */
+                           LED_RED_Pin LED_BLUE_Pin LED_PURPLE_Pin */
   GPIO_InitStruct.Pin = SEG_0_Pin|SEG_1_Pin|SEG_2_Pin|SEG_3_Pin
                           |SEG_4_Pin|SEG_5_Pin|SEG_6_Pin|SEG_7_Pin
                           |EN_0_Pin|EN_1_Pin|EN_2_Pin|EN_3_Pin
-                          |LED_RED_Pin|LED_BLUE_Pin;
+                          |LED_RED_Pin|LED_BLUE_Pin|LED_PURPLE_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

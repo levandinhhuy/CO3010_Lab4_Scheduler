@@ -7,9 +7,14 @@
 
 #include "tasks.h"
 
-void blinkyLED()
+void blinkyLEDBlue()
 {
 	HAL_GPIO_TogglePin(LED_BLUE_GPIO_Port, LED_BLUE_Pin);
+}
+
+void blinkyLEDPurple()
+{
+	HAL_GPIO_TogglePin(LED_PURPLE_GPIO_Port, LED_PURPLE_Pin);
 }
 
 void trafficLight()
