@@ -101,8 +101,6 @@ int main(void)
   SCH_Add_Task(timerRun, 0, 1);
   SCH_Add_Task(get3Buttons, 0, 20);
   SCH_Add_Task(trafficLight, 0, 10);
-
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
