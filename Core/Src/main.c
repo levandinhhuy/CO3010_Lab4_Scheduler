@@ -95,9 +95,12 @@ int main(void)
 
   SCH_Init();
 
-  SCH_Add_Task(trafficLight, msToTick(0), msToTick(1000));
+  SCH_Add_Task(blinkyLEDRed, msToTick(1000), msToTick(2000));
   SCH_Add_Task(blinkyLEDBlue, msToTick(1000), msToTick(1000));
-  SCH_Add_Task(blinkyLEDPurple, msToTick(2000), msToTick(5000));
+  SCH_Add_Task(blinkyLEDPurple, msToTick(2000), msToTick(3000));
+  SCH_Add_Task(get3KeyInput, msToTick(20), msToTick(20));
+  SCH_Add_Task(trafficLight, msToTick(0), msToTick(10));
+
 
   /* USER CODE END 2 */
 
@@ -259,6 +262,7 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+	timerRun();
 	SCH_Update();
 }
 /* USER CODE END 4 */
