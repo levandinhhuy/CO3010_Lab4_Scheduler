@@ -41,3 +41,7 @@ int isFlag(int idx)
 	return 0;
 }
 
+int msToTick(int time_ms)
+{
+	return time_ms / TICK;
+}

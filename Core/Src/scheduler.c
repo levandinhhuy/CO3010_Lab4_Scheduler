@@ -11,7 +11,7 @@
 struct Node listData[SCH_MAX_TASKS];
 int32_t head = -1;
 int32_t freeHead = 0;
-enum ErrorCode Error_code_G = INITIAL;
+enum ErrorCode Error_code_G = NO_ERROR;
 
 void resetNodeData(int32_t index)
 {
@@ -53,7 +53,6 @@ int32_t List_getFreeIndex()
 void List_freeIndex(int32_t index)
 {
 	resetNodeData(index);
-
 	listData[index].next = freeHead;
 	freeHead = index;
 }
@@ -133,7 +132,7 @@ void List_removeHead()
 void SCH_Init(void)
 {
 	List_init();
-	Error_code_G = INITIAL;
+	Error_code_G = NO_ERROR;
 }
 
 void SCH_Update(void)
@@ -177,8 +176,6 @@ void SCH_Dispatch_Tasks(void)
 			List_insert(current);
 		}
 	}
-
-	SCH_Report_Status();
 
 	if (listData[current].data.RunMe == 0)
 	{

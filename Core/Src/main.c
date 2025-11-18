@@ -94,9 +94,8 @@ int main(void)
 
   SCH_Init();
 
-//  SCH_Add_Task(getButton, 50, 100);
-//  SCH_Add_Task(trafficLight, 1000, 1000);
-  SCH_Add_Task(blinkyLED, 1, 100);
+  SCH_Add_Task(trafficLight, msToTick(2000), msToTick(1000));
+  SCH_Add_Task(blinkyLED, msToTick(1000), msToTick(1000));
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -104,7 +103,6 @@ int main(void)
   while (1)
   {
 	  SCH_Dispatch_Tasks();
-	  __WFI();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -254,7 +252,6 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
-	timerRun();
 	SCH_Update();
 }
 /* USER CODE END 4 */

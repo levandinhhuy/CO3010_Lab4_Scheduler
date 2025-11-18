@@ -7,19 +7,27 @@
 
 #include "tasks.h"
 
-void getButton()
-{
-	getKeyInput(&button0);
-	getKeyInput(&button1);
-	getKeyInput(&button2);
-}
-
-void trafficLight()
-{
-	fsm_traffic_light();
-}
-
 void blinkyLED()
 {
 	HAL_GPIO_TogglePin(LED_BLUE_GPIO_Port, LED_BLUE_Pin);
 }
+
+void trafficLight()
+{
+	if (isFlag(TIMER_STATUS))
+	{
+	  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+	  setTimer(TIMER_STATUS, TIME_STATUS);
+	}
+
+	if (isFlag(TIMER_READ_BTN))
+	{
+		getKeyInput(&button0);
+		getKeyInput(&button1);
+		getKeyInput(&button2);
+		setTimer(TIMER_READ_BTN, TIME_READ_BTN);
+	}
+
+	fsm_traffic_light();
+}
+
