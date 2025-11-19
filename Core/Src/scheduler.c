@@ -5,13 +5,11 @@
  *      Author: dinhh
  */
 
-
 #include "scheduler.h"
 
 struct Node listData[SCH_MAX_TASKS];
 int32_t head = -1;
 int32_t freeHead = 0;
-enum ErrorCode Error_code_G = NO_ERROR;
 
 void resetNodeData(int32_t index)
 {
@@ -122,17 +120,14 @@ void List_removeHead()
 {
 	if (head == -1)
 	{
-		Error_code_G = ERROR_SCH_EMPTY_LIST_CAN_NOT_REMOVED;
 		return;
 	}
-
 	head = listData[head].next;
 }
 
 void SCH_Init(void)
 {
 	List_init();
-	Error_code_G = NO_ERROR;
 }
 
 void SCH_Update(void)
@@ -186,11 +181,6 @@ void SCH_Dispatch_Tasks(void)
 uint32_t SCH_Add_Task(void (*pFunction)(), uint32_t DELAY, uint32_t PERIOD)
 {
 	int32_t freeIndex = List_getFreeIndex();
-	if (freeIndex == -1)
-	{
-		Error_code_G = ERROR_SCH_EXCEED_MAX_TASK;
-		return RETURN_ADD_ERROR;
-	}
 
 	listData[freeIndex].data.pTask = pFunction;
 	listData[freeIndex].data.Delay = DELAY;
@@ -204,12 +194,6 @@ uint32_t SCH_Add_Task(void (*pFunction)(), uint32_t DELAY, uint32_t PERIOD)
 
 uint8_t SCH_Delete_Task(uint32_t taskID)
 {
-	if (List_isEmpty())
-	{
-		Error_code_G = ERROR_SCH_EMPTY_LIST_CAN_NOT_DELETE;
-		return RETURN_ERROR;
-	}
-
 	int current = head;
 	int previous = -1;
 	while (current != -1)
@@ -243,17 +227,10 @@ uint8_t SCH_Delete_Task(uint32_t taskID)
 				resetNodeData(current);
 				List_freeIndex(current);
 			}
-			return RETURN_NORMAL;
 		}
 		previous = current;
 		current = listData[current].next;
 	}
-	return RETURN_NORMAL;
-}
-
-void SCH_Report_Status()
-{
-
 }
 
 void SCH_Go_To_Sleep()

@@ -31,18 +31,6 @@ struct Node
 	int32_t next;
 };
 
-enum ErrorCode
-{
-	NO_ERROR,
-	ERROR_SCH_EXCEED_MAX_TASK,
-	ERROR_SCH_EMPTY_LIST_CAN_NOT_REMOVED,
-	ERROR_SCH_EMPTY_LIST_CAN_NOT_DELETE
-};
-
-#define RETURN_ERROR 0
-#define RETURN_NORMAL 1
-#define RETURN_ADD_ERROR UINT32_MAX
-
 // MUST BE ADJUSTED FOR EACH PROJECT
 #define SCH_MAX_TASKS 40
 #define NO_TASK_ID 0
@@ -50,7 +38,6 @@ enum ErrorCode
 extern struct Node listData[SCH_MAX_TASKS];
 extern int32_t head;
 extern int32_t freeHead;
-extern enum ErrorCode Error_code_G;
 
 void resetNodeData(int32_t index);
 void initFreeList();
@@ -66,7 +53,6 @@ void SCH_Update(void);
 void SCH_Dispatch_Tasks(void);
 uint32_t SCH_Add_Task(void (*pFunction)(), uint32_t DELAY, uint32_t PERIOD);
 uint8_t SCH_Delete_Task(uint32_t taskID);
-void SCH_Report_Status();
 void SCH_Go_To_Sleep();
 
 
